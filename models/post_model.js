@@ -7,14 +7,6 @@ module.exports = db.define("post ", {
     primaryKey: true,
     autoIncrement: true
   },
-  UserID: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: 'user',
-      key: 'Id'
-    }
-  },
   title: {
     type: DataTypes.STRING(100),
     allowNull: false,
