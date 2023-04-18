@@ -2,6 +2,11 @@ const db = require("../config/db");
 const { DataTypes } = require("sequelize");
 
 module.exports = db.define("user", {
+  UserID: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+  },
   username: {
     type: DataTypes.STRING(100),
     allowNull: false,

@@ -20,7 +20,7 @@ db.authenticate().then(() => {
 });
 
 
-router.get("/users", async (req, res) => {
+app.get("/users", async (req, res) => {
   try {
     const users = await User.findAll();
     res.json(users);
@@ -30,7 +30,7 @@ router.get("/users", async (req, res) => {
 });
 
 // create  new user
-router.post("/users", async (req, res) => {
+app.post("/users", async (req, res) => {
   try {
     const user = await User.create(req.body);
     res.status(201).json(user);
@@ -39,7 +39,7 @@ router.post("/users", async (req, res) => {
   }
 });
 
-router.put("/users/:id", async (req, res) => {
+app.put("/users/:id", async (req, res) => {
   try {
     const [count, user] = await User.update(req.body, {
       where: { id: req.params.id },
@@ -56,7 +56,7 @@ router.put("/users/:id", async (req, res) => {
 });
 
 // Delete an existing user
-router.delete("/users/:id", async (req, res) => {
+app.delete("/users/:id", async (req, res) => {
   try {
     const count = await User.destroy({ where: { id: req.params.id } });
     if (count === 0) {
@@ -70,7 +70,7 @@ router.delete("/users/:id", async (req, res) => {
 });
 
 // Create a new post (only for admin users)
-router.post("/posts", async (req, res) => {
+app.post("/posts", async (req, res) => {
   if (req.user.role !== "admin") {
     res.status(403).json({ error: "Forbidden" });
     return;
@@ -88,7 +88,7 @@ router.post("/posts", async (req, res) => {
 });
 
 // Retrieve all posts (only for admin users)
-router.get("/posts", async (req, res) => {
+app.get("/posts", async (req, res) => {
   if (req.user.role !== "admin") {
     res.status(403).json({ error: "Forbidden" });
     return;
@@ -103,7 +103,7 @@ router.get("/posts", async (req, res) => {
 });
 
 // Retrieve a single post only for the admin user
-router.get("/posts/:id", async (req, res) => {
+app.get("/posts/:id", async (req, res) => {
   if (req.user.role !== "admin") {
     res.status(403).json({ error: "Forbidden" });
     return;
@@ -125,7 +125,7 @@ router.get("/posts/:id", async (req, res) => {
 });
 
 // Update an existing post (only for admin users)
-router.put("/posts/:id", async (req, res) => {
+app.put("/posts/:id", async (req, res) => {
   if (req.user.role !== "admin") {
     res.status(403).json({ error: "Forbidden" });
     return;
@@ -147,7 +147,7 @@ router.put("/posts/:id", async (req, res) => {
 });
 
 // Delete an existing post (only for admin users)
-router.delete("/posts/:id", async (req, res) => {
+app.delete("/posts/:id", async (req, res) => {
   if (req.user.role !== "admin") {
     res.status(403).json({ error: "Forbidden" });
     return;
