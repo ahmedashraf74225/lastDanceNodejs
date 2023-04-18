@@ -8,8 +8,8 @@ const router = express.Router();
 const User = require("./models/user_model.js");
 const Post = require("./models/post_model.js");
 
-User.hasMany(Post);
-Post.belongsTo(User);
+User.hasMany(Post, { foreignKey: 'UserID' });
+Post.belongsTo(User, { foreignKey: 'UserID' });
 
 app.use(express.json());
 
